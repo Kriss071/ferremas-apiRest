@@ -1,6 +1,6 @@
-from models import *
+from .models import *
 from rest_framework import viewsets, permissions
-from serializers import *
+from .serializers import *
 
 # Create your views here.
 
