@@ -106,7 +106,7 @@ DATABASES = {
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://admin:q0pVTUo5QtfrM5KTwpMkADUhaVceS23p@dpg-cp1natgl5elc73f19r6g-a/db_ecommerce_ferremas',
+        default='postgresql://postgres:postgres@localhost:5432/mysite',
         conn_max_age=600
     )
 }
