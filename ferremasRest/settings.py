@@ -75,10 +75,25 @@ WSGI_APPLICATION = 'ferremasRest.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# === Sqlite3 Database ===
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# === PostgreSql Database ===
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'db_ecommerce_ferremas',
+        'USER': 'admin',
+        'PASSWORD': 'q0pVTUo5QtfrM5KTwpMkADUhaVceS23p',
+        'HOST': 'dpg-cp1natgl5elc73f19r6g-a.oregon-postgres.render.com',
+        'PORT': 5432
     }
 }
 
