@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--m(bmsd#jg5^%s^ud8n6azlalb85nb-q()4lg9*dcm=kq5fiqt'
+# SECRET_KEY = 'django-insecure--m(bmsd#jg5^%s^ud8n6azlalb85nb-q()4lg9*dcm=kq5fiqt'
 SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -93,16 +93,16 @@ WSGI_APPLICATION = 'ferremasRest.wsgi.application'
 
 # === PostgreSql Database ===
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_ecommerce_ferremas',
-        'USER': 'admin',
-        'PASSWORD': 'q0pVTUo5QtfrM5KTwpMkADUhaVceS23p',
-        'HOST': 'dpg-cp1natgl5elc73f19r6g-a.oregon-postgres.render.com',
-        'PORT': 5432
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'db_ecommerce_ferremas',
+#         'USER': 'admin',
+#         'PASSWORD': 'q0pVTUo5QtfrM5KTwpMkADUhaVceS23p',
+#         'HOST': 'dpg-cp1natgl5elc73f19r6g-a.oregon-postgres.render.com',
+#         'PORT': 5432
+#     }
+# }
 
 DATABASES = {
     'default': dj_database_url.config(
