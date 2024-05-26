@@ -106,7 +106,7 @@ WSGI_APPLICATION = 'ferremasRest.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://postgres:postgres@localhost:5432/mysite',
+        default='postgres://admin:TnxRDs4TEQMbNHfloPrl1OIkEAgFaiFS@dpg-cp9anllds78s73cf4gn0-a/db_ecommerce_ferremas_54fi',
         conn_max_age=600
     )
 }
