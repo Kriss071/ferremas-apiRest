@@ -1,5 +1,6 @@
 from .models import *
 from rest_framework import viewsets, permissions
+from django_filter.rest_framework import DjangoFilterBackend
 from .serializers import *
 
 # Create your views here.
