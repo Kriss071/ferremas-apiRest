@@ -45,8 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'products',
-    'django_filters',
-
 ]
 
 REST_FRAMEWORK = {
