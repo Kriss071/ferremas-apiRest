@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'products'
+    'products',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,36 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',   
+    'whitenoise.middleware.WhiteNoiseMiddleware',  
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "https://localhost:8000",
+    "http://127.0.0.1:8000",
+]
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
 ]
 
 ROOT_URLCONF = 'ferremasRest.urls'
@@ -85,12 +115,12 @@ WSGI_APPLICATION = 'ferremasRest.wsgi.application'
 
 # === Sqlite3 Database ===
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # === PostgreSql Database ===
 
@@ -105,12 +135,12 @@ WSGI_APPLICATION = 'ferremasRest.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://admin:TnxRDs4TEQMbNHfloPrl1OIkEAgFaiFS@dpg-cp9anllds78s73cf4gn0-a/db_ecommerce_ferremas_54fi',
-        conn_max_age=600
-    )
-}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default='postgres://admin:TnxRDs4TEQMbNHfloPrl1OIkEAgFaiFS@dpg-cp9anllds78s73cf4gn0-a/db_ecommerce_ferremas_54fi',
+#         conn_max_age=600
+#     )
+# }
 
 
 # Password validation
