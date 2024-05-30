@@ -42,9 +42,9 @@ def product_list(request):
 
 
 @api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
-def product_detail(request, pk):
+def product_detail(request, id):
     try:
-        product = Product.objects.get(id=pk)
+        product = Product.objects.get(id=id)
     except Product.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
