@@ -115,12 +115,12 @@ WSGI_APPLICATION = 'ferremasRest.wsgi.application'
 
 # === Sqlite3 Database ===
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # === PostgreSql Database ===
 
@@ -135,12 +135,12 @@ DATABASES = {
 #     }
 # }
 
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default='postgres://admin:TnxRDs4TEQMbNHfloPrl1OIkEAgFaiFS@dpg-cp9anllds78s73cf4gn0-a/db_ecommerce_ferremas_54fi',
-#         conn_max_age=600
-#     )
-# }
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgres://admin:TnxRDs4TEQMbNHfloPrl1OIkEAgFaiFS@dpg-cp9anllds78s73cf4gn0-a/db_ecommerce_ferremas_54fi',
+        conn_max_age=600
+    )
+}
 
 
 # Password validation
