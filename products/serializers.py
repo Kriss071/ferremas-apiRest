@@ -10,3 +10,15 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta: 
         model = Categoria
         fields = ('id', 'name')
+        
+class DetallePedidoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DetallePedido
+        fields = '__all__'
+
+class PedidoSerializer(serializers.ModelSerializer):
+    pedidos = DetallePedidoSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Pedido
+        fields = '__all__'

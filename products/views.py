@@ -1,6 +1,13 @@
 from .models import *
 from rest_framework import viewsets, permissions
 from .serializers import *
+from .models import Product
+from .serializers import ProductSerializer
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import Product
+from .serializers import ProductSerializer
 
 # Create your views here.
 class ProductViewSet(viewsets.ModelViewSet):
@@ -10,16 +17,14 @@ class ProductViewSet(viewsets.ModelViewSet):
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Categoria.objects.all()
     serializer_class = CategorySerializer
+    
+class PedidoViewSet(viewsets.ModelViewSet):
+    queryset = Pedido.objects.all()
+    serializer_class = PedidoSerializer
 
-from .models import Product
-from .serializers import ProductSerializer
-from rest_framework import status
-
-
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from .models import Product
-from .serializers import ProductSerializer
+class DetallePedidoViewSet(viewsets.ModelViewSet):
+    queryset = DetallePedido.objects.all()
+    serializer_class = DetallePedidoSerializer
 
 @api_view(['GET', 'POST', 'PUT', 'PATCH', 'DELETE'])
 def product_list(request):
@@ -34,12 +39,6 @@ def product_list(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-
-
-
-
 
 @api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
 def product_detail(request, id):
