@@ -25,4 +25,4 @@ def create_payment(request):
             #     "urlReturn": url_return,
             # }
             return Response({'msg': 'Datos recibidos', 'data': data}, status=status.HTTP_200_OK)
-        
+        return Response({'msg': 'Datos no recibidos', 'data': data}, status=status.HTTP_200_OK)
