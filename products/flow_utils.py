@@ -1,28 +1,59 @@
+import hashlib
+import hmac
+from django.urls import reverse
+import requests
 from rest_framework.decorators import api_view
 from .serializers import *
 from django.conf import settings
 from rest_framework.response import Response
 from rest_framework import status
 
+
+def sign_request(params):
+    keys = sorted(params.keys())
+    to_sign = ''.join(key + str(params[key]) for key in keys)
+    signature = hmac.new(bytes(settings.FLOW_SECRET_SANDBOX, 'utf-8'), to_sign.encode('utf-8'), hashlib.sha256).hexdigest()
+    return signature
+
+def make_request(url, params, method='GET'):
+    signature = sign_request(params)
+    params['s'] = signature
+
+    if method == 'GET':
+        response = requests.get(url, params=params)
+    else:
+        response = requests.post(url, data=params)
+    return response.json()
+
+
 @api_view(['POST'])
 def create_payment(request):
-    if request.methos == 'POST':
+    if request.method == 'POST':
         serializers = PedidoSerializer(data=request.data)
         
         if serializers.is_valid():
             data = serializers.validated_data
         
             url = 'https://sandbox.flow.cl/api/payment/create'
-            print(data)
-            #  params = {
-            #     'apiKey': settings.FLOW_KEY_SANDBOX,
-            #     'commerceOrder': f"F{id_pedido}" ,
-            #     'subject': 'Pago de pruebA',
-            #     'currency': 'CLP',
-            #     'amount': monto,
-            #     'email': email,
-            #     "urlConfirmation": url_confirmation,
-            #     "urlReturn": url_return,
-            # }
-            return Response({'msg': 'Datos recibidos', 'data': data}, status=status.HTTP_200_OK)
+            
+            url_return = 'http://127.0.0.1:8000'
+            url_confirmation = 'http://127.0.0.1:8000/catalogo/'
+            
+            params = {
+                'apiKey': settings.FLOW_KEY_SANDBOX,
+                'commerceOrder': f"F{data['nombre']}" ,
+                'subject': 'Pago de pruebA',
+                'currency': 'CLP',
+                'amount': data['valor_total'],
+                'email': data['correo'],
+                "urlConfirmation": url_confirmation,
+                "urlReturn": url_return,
+            }
+             
+            print("Parámetros para crear el pago:", params)
+
+            response = make_request(url, params, method='POST')
+
+            return Response(response)
+
         return Response({'msg': 'Datos no recibidos', 'data': data}, status=status.HTTP_200_OK)

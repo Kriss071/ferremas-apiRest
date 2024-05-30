@@ -61,13 +61,4 @@ def product_detail(request, id):
     elif request.method == 'DELETE':
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-@api_view(['POST'])
-def create_payment(request):
-    if request.methos == 'POST':
-        serializers = PedidoSerializer(data=request.data)
-        
-        if serializers.is_valid():
-            data = serializers.validated_data
             
