@@ -13,5 +13,6 @@ urlpatterns = router.urls + [
     path('products/', views.product_list, name='product_list'),
     path('products/<int:id>/', views.product_detail, name='product_detail'),
     path('api/create-payment/', create_payment, name='create_payment'),
+    path('api/get-payment/', get_payment, name='get_payment'),
 
 ]

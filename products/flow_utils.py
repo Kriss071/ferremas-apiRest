@@ -36,7 +36,7 @@ def create_payment(request):
         
             url = 'https://sandbox.flow.cl/api/payment/create'
             
-            url_return = 'http://127.0.0.1:8000'
+            url_return = 'http://127.0.0.1:8000/retorno_flow/'
             url_confirmation = 'http://127.0.0.1:8000/catalogo/'
             
             params = {
@@ -57,3 +57,33 @@ def create_payment(request):
             return Response(response)
 
         return Response({'msg': 'Datos no recibidos', 'data': data}, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def get_payment(request):
+    url = 'https://sandbox.flow.cl/api/payment/getStatus'
+    data = request.data
+    print('===== DATA ====')
+    print(data)
+    
+    parametros = {
+        'apiKey': settings.FLOW_KEY_SANDBOX,
+        'token': data,
+    }
+    
+    response = make_request(url, parametros, method='GET')
+    
+        
+    transaccion = {
+        'commerceOrder': response.get('commerceOrder'),
+        'requestDate': response.get('requestDate'),
+        'subject': response.get('subject'),
+        'payer': response.get('payer'),
+        'amount': response.get('amount'),
+        'currency': response.get('currency'),
+        'media': response.get('paymentData', {}).get('media'),
+        'status': response.get('status')
+    }
+    
+    print(transaccion)
+    
+    return Response(transaccion)
